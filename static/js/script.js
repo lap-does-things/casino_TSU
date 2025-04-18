@@ -2,6 +2,53 @@ let currentMultiplier = 1;
 let rotation = 0;
 
 function setMultiplier(x) {
+        document.getElementById("btn1").classList.remove("green");
+        document.getElementById("btn2").classList.remove("green");
+        document.getElementById("btn3").classList.remove("green");
+        document.getElementById("btn4").classList.remove("green");
+        document.getElementById("btn5").classList.remove("green");
+        document.getElementById("btn1").classList.remove("red");
+        document.getElementById("btn2").classList.remove("red");
+        document.getElementById("btn3").classList.remove("red");
+        document.getElementById("btn4").classList.remove("red");
+        document.getElementById("btn5").classList.remove("red");
+    switch (x) {
+        case 1:
+            document.getElementById("btn1").classList.add("green");
+            document.getElementById("btn2").classList.add("red");
+            document.getElementById("btn3").classList.add("red");
+            document.getElementById("btn4").classList.add("red");
+            document.getElementById("btn5").classList.add("red");
+            break;
+        case 2:
+            document.getElementById("btn2").classList.add("green");
+            document.getElementById("btn1").classList.add("red");
+            document.getElementById("btn3").classList.add("red");
+            document.getElementById("btn4").classList.add("red");
+            document.getElementById("btn5").classList.add("red");
+            break;
+        case 3:
+            document.getElementById("btn3").classList.add("green");
+            document.getElementById("btn2").classList.add("red");
+            document.getElementById("btn1").classList.add("red");
+            document.getElementById("btn4").classList.add("red");
+            document.getElementById("btn5").classList.add("red");
+            break;
+        case 4:
+            document.getElementById("btn4").classList.add("green");
+            document.getElementById("btn2").classList.add("red");
+            document.getElementById("btn3").classList.add("red");
+            document.getElementById("btn1").classList.add("red");
+            document.getElementById("btn5").classList.add("red");
+            break;
+        case 5:
+            document.getElementById("btn5").classList.add("green");
+            document.getElementById("btn2").classList.add("red");
+            document.getElementById("btn3").classList.add("red");
+            document.getElementById("btn4").classList.add("red");
+            document.getElementById("btn1").classList.add("red");
+            break;
+    }
     currentMultiplier = x;
     const img = document.getElementById("cylinder");
     img.src = `/static/images/cylinder${x}.png`;
