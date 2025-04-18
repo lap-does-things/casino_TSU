@@ -55,6 +55,11 @@ function setMultiplier(x) {
 }
 
 document.querySelector('.submit-btn').addEventListener('click', () => {
+    $.getJSON(`/nigger/cock?mult=${currentMultiplier}`,
+        function(data, textStatus, jqXHR) {
+            win = data.result.win;
+        }
+    );
     const niggerbtn = document.getElementById("niggerbtn");
     niggerbtn.style.display = "none";
     const img = document.getElementById("cylinder");
@@ -71,21 +76,19 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
 
     // Через 2.1 секунды — когда закончится анимация — показываем результат
     setTimeout(() => {
-        const totalSlots = 6;
-        const bullets = currentMultiplier; // сколько патронов
-        const winningSlot = Math.floor(Math.random() * totalSlots) + 1;
 
         const resultDiv = document.getElementById("resultMessage");
-        if (winningSlot <= bullets) {
-            resultDiv.innerText = "Вы проиграли...";
+        if (win == 'nenihuya') {
+            resultDiv.innerText = "Вы проиграли!";
         } else {
             resultDiv.innerText = "Вы победили!";
         }
         resultDiv.style.display = "flex";
-
+        // Я ТРАХАЛ ВОЛА XDDDDD
         // Убрать через 3 секунды
         setTimeout(() => {
             resultDiv.style.display = "none";
+            //resultDiv.remove();
             niggerbtn.style.display = "inline-block";
         }, 3000);
     }, 2100);
