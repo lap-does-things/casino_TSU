@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Русская рулетка</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay">
+        <div class="info-box">
+            <p>Русская рулетка - классическая азартная игра, но в нашей версии нет риска для жизни. От Вас требуется
+                выбрать количество патронов, которые будут вставлены в барабан. Чем больше патронов, тем больше денег Вы
+                получите при выигрыше. При проигрыше вы теряете поставленные средства.</p>
+        </div>
+
+        <div class="revolver-image">
+            <img id="cylinder" src="{{ url_for('static', filename='images/cylinder1.png') }}" alt="Цилиндр">
+
+            <div class="pointer"></div>
+        </div>
+
+        <div class="controls">
+            <p>Сумма ставки:</p>
+            <div class="bet-buttons">
+                <button onclick="setMultiplier(1)" class="btn green">1X</button>
+                <button onclick="setMultiplier(2)" class="btn red">2X</button>
+                <button onclick="setMultiplier(3)" class="btn red">3X</button>
+                <button onclick="setMultiplier(4)" class="btn red">4X</button>
+                <button onclick="setMultiplier(5)" class="btn red">5X</button>
+            </div>
+            <button class="submit-btn">ПОСТАВИТЬ</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <div class="overlay-message" id="resultMessage">Вы проиграли!</div>
+
+</body>
+</html>
