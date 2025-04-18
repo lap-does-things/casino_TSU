@@ -55,6 +55,8 @@ function setMultiplier(x) {
 }
 
 document.querySelector('.submit-btn').addEventListener('click', () => {
+    const niggerbtn = document.getElementById("niggerbtn");
+    niggerbtn.style.display = "none";
     const img = document.getElementById("cylinder");
 
     // Генерируем случайный поворот: 3–5 оборотов
@@ -84,6 +86,7 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
         // Убрать через 3 секунды
         setTimeout(() => {
             resultDiv.style.display = "none";
+            niggerbtn.style.display = "inline-block";
         }, 3000);
     }, 2100);
 });
