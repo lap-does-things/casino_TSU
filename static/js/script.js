@@ -84,7 +84,27 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
     const img = document.getElementById("cylinder");
 
     // Генерируем случайный поворот: 3–5 оборотов
-    const turns = Math.floor(Math.random() * 5) + 11;
+    // [x] это ХУЙНЯ!!!!!!!!!!!!!!!!!
+    /*
+    Обороты никак не связаны с количеством и расположением патронов в барабане.
+    Это просто случайный поворот цилиндра, и часто выпадает пуля, когда ты победил и наоборот.
+
+    Я ТРАХАЛ ТОГО КТО ЭТО ПИСАЛ
+
+(если это не мужик)
+
+-Лэп.
+
+P.S. если это правда не мужик, то я серьёзно ;)
+    */
+
+// https://a.d-cd.net/R34aG_8UGYblYQsYHOgDR9h9jMA-960.jpg
+
+// Почему дальше по коду он видит win в скоупе, а тут нет????
+    var turns = Math.floor(Math.random() * 5) + 11;
+//    alert(win);
+    //Какого-то хуя не работают ни if, ни switch. Хуйня. Хуйня. Хуйня. Хуйня. Хуйня. Просто виснет скрипт
+    // В конце кода он видит win в скоупе, а тут нет????
     rotation += 360 * turns;
 
     img.style.transform = `rotate(${rotation}deg)`;
@@ -97,7 +117,7 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
     setTimeout(() => {
 
         const resultDiv = document.getElementById("resultMessage");
-        if (!win) {
+        if (!win == true) {
             resultDiv.innerText = `Вы проиграли! Вы лишились ${stake} рублей!`;
             StakeField.value = Number(StakeField.value) - stake; // TODO : ЗАМЕНИТЬ VALUE НА ОБЩИЙ СЧЕТ ЮЗНИ
             if (StakeField.value < stake) {
