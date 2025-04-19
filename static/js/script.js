@@ -61,6 +61,18 @@ function setMultiplier(x) {
 
 document.querySelector('.submit-btn').addEventListener('click', () => {
     const StakeField = document.getElementById("stake");
+    const resultDiv = document.getElementById("resultMessage");
+    if (StakeField.value <= 0) {
+        // [x] DELETEME alert("Введите сумму ставки");
+        resultDiv.innerText = `Введите сумму ставки!`;
+        resultDiv.style.display = "flex";
+        setTimeout(() => {
+            resultDiv.style.display = "none";
+            //resultDiv.remove();
+            casinobtn.style.display = "inline-block";
+        }, 3000);
+        return;
+    }
     $.getJSON(`/casino/krutka?mult=${currentMultiplier}&stake=${StakeField.value}`,
         function(data) {
             win = data.result.win;
@@ -105,4 +117,5 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
             casinobtn.style.display = "inline-block";
         }, 3000);
     }, 2100);
+    // Люблю вас, ребята - Лэп.
 });

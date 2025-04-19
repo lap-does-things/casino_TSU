@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Русская рулетка</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <script src="
+    https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+</head>
+<body>
+    <div class="overlay">
+        <div class="top-bar">
+            <div class="logo">
+                <!-- <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"> -->
+            </div>
+            <div class="menu" style="display: inline-block;">
+                <div class="menu-item">
+                    <a href="#">Вход</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#">Регистрация</a>
+                </div>
+            </div>
+        </div>
+        <div class="info-box">
+            <p>Создай свой сексуальный аккаунт в нашей ебейшей рулетке и получи деньги за покупку патронов!
+                Лорем ипсум просто не выйдет из себя без денег, поэтому получи его только в рамках этой рулетки.
+                <br>(С) Нейронка
+            </p>
+        </div>
+        <div class="form" style="margin: 20px;">
+            <form action="{{ url_for('register') }}" method="post">
+                <input class="ebatsyavredno" type="text" name="name" placeholder="Никнейм" required><br><br><br>
+                <input class="ebatsyavredno" type="text" name="email" placeholder="E-mail"><br><br><br>
+                <input class="ebatsyavredno" type="password" name="password" placeholder="Пароль" required><br><br><br>
+                <button class="ebatsyavredno" type="submit">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <div class="overlay-message" id="resultMessage">Вы проиграли!</div>
+
+</body>
+</html>

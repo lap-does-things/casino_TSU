@@ -6,14 +6,52 @@ body {
     background-position: center;
     color: white;
 }
+.menu-item {
+    display: inline-block;
+    padding: 10px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 15px;
+    border: 1px solid red;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.menu-item a { /* DELETEME */
+    color: white;
+    text-decoration: none;
+}
 .ebatsyavredno{
     padding: 10px 20px;
     font-size: 18px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.1);
     color: black;
     border-radius: 5px;
     cursor: pointer;
+    border: 1px solid red;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
+
+#casinobtn{
+    color:white;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    border: 1px solid red;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+#casinobtn:hover{
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+#stake:hover{
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
 .overlay {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 30px;
@@ -80,7 +118,6 @@ body {
     cursor: pointer;
 }
 
-# Вращение барабана
 @keyframes spin {
     0%   { transform: rotate(0deg); }
     100% { transform: rotate(1080deg); } /* 3 оборота */
@@ -93,6 +130,7 @@ body {
 .pointer {
     position: absolute;
     top: calc(50% - 100px); /* регулируй под свою высоту */
+    /* TODO: Медиазапрос для размеров ВСЕХ элементов*/
     left: 50%;
     transform: translateX(-50%);
     width: 0;
