@@ -69,67 +69,44 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
         resultDiv.style.display = "flex";
         setTimeout(() => {
             resultDiv.style.display = "none";
-            //resultDiv.remove();
+            //resultDiv.remove(); //DELETEME
             casinobtn.style.display = "inline-block";
         }, 3000);
         return;
     }
+////When you can't even say my name
+////Has the memory gone? Are you feeling numb?
+////Go and call my name
+////I can't play this game, so I ask again
+////Will you say my name?
+////Has the memory gone? Are you feeling numb?
+////Or have I become invisible?
+
+// апишка солида снейка лмао
+
     $.getJSON(`/casino/krutka?mult=${currentMultiplier}&stake=${StakeField.value}`,
+        // Обращаемся по ссылке к API для расчёта результата игры. API в этом же проекте, но зато можно крутить даже из консоли.
         function(data) {
+            /* API приведён к следующему виду :
+                {
+                  "result": {
+                    "stake": 200,
+                    "win": true
+                  }
+                }
+            */
             win = data.result.win;
             stake = data.result.stake;
-            win = false; //[x] DELETEME  DEBUG
+            win = false;
             switch (win) {
                 case true:
-                    //alert("Вы победили!  Вы получили " + stake + " рублей!");
-                    switch(currentMultiplier) {
-                        case 1:
-                            alert("1,1");
-                            turns = 3;
-                            break;
-                        case 2:
-                            alert("Вы победили!  Вы получили " + stake + " рублей!");
-                            break;
-                        case 3:
-                            alert("Вы победили!  Вы получили " + stake + " рублей!");
-                            break;
-                        case 4:
-                            alert("Вы победили!  Вы получили " + stake + " рублей!");
-                            break;
-                        case 5:
-                            //alert("Вы победили!  Вы получили " + stake + " рублей!");
-                            break;
-                        default:
-                            alert("default");
-                            break;
-                    }
+                    turns = 3.65;
                     break;
                 case false:
-                    switch(currentMultiplier) {
-                        case 1:
-                            alert("2,1");
-                            turns = 2.8;
-                            break;
-                        case 2:
-                            alert("Вы проиграли! Вы лишились " + stake + " рублей!");
-                            break;
-                        case 3:
-                            alert("Вы проиграли! Вы лишились " + stake + " рублей!");
-                            break;
-                        case 4:
-                            alert("Вы проиграли! Вы лишились " + stake + " рублей!");
-                            break;
-                        case 5:
-                            alert("Вы проиграли! Вы лишились " + stake + " рублей!");
-                            // Вы проиграли! Вы лишились 10 рублей!
-                            break;
-                        default:
-                            alert("default");
-                            break;
-                    }
+                    turns = 2.8;
                     break;
                 default:
-                    alert("default");
+                    alert("Что-то пошло ужасно не так, попробуйте ещё раз!");
                     break;
             }
             const casinobtn = document.getElementById("casinobtn");
@@ -156,18 +133,11 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
 
         // https://a.d-cd.net/R34aG_8UGYblYQsYHOgDR9h9jMA-960.jpg
 
-        // Почему дальше по коду он видит win в скоупе, а тут нет????
             //turns = Math.floor(Math.random() * 5) + 11;
 
-            //Какого-то хуя не работают ни if, ни switch. Хуйня. Хуйня. Хуйня. Хуйня. Хуйня. Просто виснет скрипт
-            // В конце кода он видит win в скоупе, а тут нет????
             rotation += 360 * turns;
             img.classList.remove("rotate");
             img.style.transform = `rotate(${rotation}deg)`;
-
-            img.classList.remove("rotate"); // сброс, если уже был запуск
-            void img.offsetWidth; // форс пересчёт layout — для повторной анимации
-            img.classList.add("rotate");
 
             // Через 2.1 секунды — когда закончится анимация — показываем результат
             setTimeout(() => {
@@ -177,7 +147,7 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
                     resultDiv.innerText = `Вы проиграли! Вы лишились ${stake} рублей!`;
                     StakeField.value = Number(StakeField.value) - stake; // TODO : ЗАМЕНИТЬ VALUE НА ОБЩИЙ СЧЕТ ЮЗНИ
                     if (StakeField.value < stake) {
-                        resultDiv.innerText = `Вы проиграли! Вы безбожно лишились ${stake} рублей!`;
+                        resultDiv.innerText = `Вы проиграли! Вы безбожно лишились ${stake / currentMultiplier} рублей!`;
                         StakeField.value = 0;
                     }
                 } else {
@@ -185,26 +155,22 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
                     StakeField.value = Number(StakeField.value) + stake;
                 }
                 resultDiv.style.display = "flex";
+                img.style.transform = `rotate(0deg)`;
+                    // !!!! ВАЖНО !!! это сброс анимации, чтобы углы сверху работали
+                    // !!!!! Если ты их уберешь, будет рассинхрон в анимации и исходе крутки !!!!
+                    // !!!! да и вообще выглядит пиздато тоже !!!!
 
                 // Убрать через 3 секунды
                 setTimeout(() => {
                     resultDiv.style.display = "none";
                     casinobtn.style.display = "inline-block";
-                    img.style.transform = `rotate(0deg)`; // !!!! ВАЖНО !!! это сброс анимации, чтобы углы сверху работали
-                    // !!!!! Если ты их уберешь, будет рассинхрон в анимации и исходе крутки !!!!
-                    // !!!! да и вообще выглядит пиздато тоже !!!!
                 }, 3000);
             }, 2100);
-            img.classList.remove("rotate"); // сброс, если уже был запуск
-            void img.offsetWidth; // форс пересчёт layout — для повторной анимации
-            img.classList.add("rotate");
-
             turns = 0;
+            rotation = 0;
             return turns;
         }
 
     );
-
-
-    // Люблю вас, ребята - Лэп.
+    // Люблю вас, ребята. Это было тяжело, но весело.  - Лэп.
 });
