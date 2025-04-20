@@ -1,60 +1,22 @@
 let currentMultiplier = 1;
 let rotation = 0;
-btn1 = document.getElementById("btn1");
-btn2 = document.getElementById("btn2");
-btn3 = document.getElementById("btn3");
-btn4 = document.getElementById("btn4");
-btn5 = document.getElementById("btn5");
+
+for (let i = 1; i <= 5; i++) {
+    let btn = document.getElementById(`btn${i}`);
+    btn.addEventListener("click", function() {
+        setMultiplier(i);
+    });
+}
+
+multbtns = [btn1, btn2, btn3, btn4, btn5];
 var win;
 
 function setMultiplier(x) {
-        btn1.classList.remove("green");
-        btn2.classList.remove("green");
-        btn3.classList.remove("green");
-        btn4.classList.remove("green");
-        btn5.classList.remove("green");
-        btn1.classList.remove("red");
-        btn2.classList.remove("red");
-        btn3.classList.remove("red");
-        btn4.classList.remove("red");
-        btn5.classList.remove("red");
-    switch (x) {
-        case 1:
-            btn1.classList.add("green");
-            btn2.classList.add("red");
-            btn3.classList.add("red");
-            btn4.classList.add("red");
-            btn5.classList.add("red");
-            break;
-        case 2:
-            btn2.classList.add("green");
-            btn1.classList.add("red");
-            btn3.classList.add("red");
-            btn4.classList.add("red");
-            btn5.classList.add("red");
-            break;
-        case 3:
-            btn3.classList.add("green");
-            btn2.classList.add("red");
-            btn1.classList.add("red");
-            btn4.classList.add("red");
-            btn5.classList.add("red");
-            break;
-        case 4:
-            btn4.classList.add("green");
-            btn2.classList.add("red");
-            btn3.classList.add("red");
-            btn1.classList.add("red");
-            btn5.classList.add("red");
-            break;
-        case 5:
-            btn5.classList.add("green");
-            btn2.classList.add("red");
-            btn3.classList.add("red");
-            btn4.classList.add("red");
-            btn1.classList.add("red");
-            break;
-    }
+    multbtns.forEach(function(btn) {
+        btn.classList.remove("green");
+    });
+    $(`#btn${x}`).addClass("green"); // Ьоже как же я горд тем, что я до этого додумался
+    // Целый экран текста сжат до 4 строк.
     currentMultiplier = x;
     const img = document.getElementById("cylinder");
     img.src = `/static/images/cylinder${x}.png`;
@@ -97,7 +59,6 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
             */
             win = data.result.win;
             stake = data.result.stake;
-            win = false;
             switch (win) {
                 case true:
                     turns = 3.65;
