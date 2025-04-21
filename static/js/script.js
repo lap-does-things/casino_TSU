@@ -1,15 +1,15 @@
 let currentMultiplier = 1;
 let rotation = 0;
+var win;
+multbtns = [];
 
-for (let i = 1; i <= 5; i++) {
-    let btn = document.getElementById(`btn${i}`);
+for (let i = 1; i <= 5; i++) { // Объявление кнопок и пуш в массив
+    let btn = document.getElementById(`btn${i}`); // i.e. i=1 => btn1, i=2 => btn2, и т.д.
     btn.addEventListener("click", function() {
         setMultiplier(i);
     });
+    multbtns.push(btn);
 }
-
-multbtns = [btn1, btn2, btn3, btn4, btn5];
-var win;
 
 function setMultiplier(x) {
     multbtns.forEach(function(btn) {
@@ -120,7 +120,6 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
                     // !!!! ВАЖНО !!! это сброс анимации, чтобы углы сверху работали
                     // !!!!! Если ты их уберешь, будет рассинхрон в анимации и исходе крутки !!!!
                     // !!!! да и вообще выглядит пиздато тоже !!!!
-
                 // Убрать через 3 секунды
                 setTimeout(() => {
                     resultDiv.style.display = "none";
