@@ -26,7 +26,6 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
     const StakeField = document.getElementById("stake");
     const resultDiv = document.getElementById("resultMessage");
     if (StakeField.value <= 0) {
-        // [x] DELETEME alert("Введите сумму ставки");
         resultDiv.innerText = `Введите сумму ставки!`;
         resultDiv.style.display = "flex";
         setTimeout(() => {
@@ -47,9 +46,9 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
 // апишка солида снейка лмао
 
     $.getJSON(`/casino/krutka?mult=${currentMultiplier}&stake=${StakeField.value}`,
-        // Обращаемся по ссылке к API для расчёта результата игры. API в этом же проекте, но зато можно крутить даже из консоли.
+        // [x] Обращаемся по ссылке к API для расчёта результата игры. API в этом же проекте, но зато можно крутить даже из консоли.
         function(data) {
-            /* API приведён к следующему виду :
+            /* JSON API приведён к следующему виду :
                 {
                   "result": {
                     "stake": 200,
