@@ -30,7 +30,6 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
         resultDiv.style.display = "flex";
         setTimeout(() => {
             resultDiv.style.display = "none";
-            //resultDiv.remove(); //DELETEME
             casinobtn.style.display = "inline-block";
         }, 3000);
         return;
