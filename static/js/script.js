@@ -34,11 +34,14 @@ document.querySelector('.submit-btn').addEventListener('click', () => {
         }, 3000);
         return;
     }
-////When you can't even say my name
+////When you can't even say
+//// My name
 ////Has the memory gone? Are you feeling numb?
-////Go and call my name
+////Go and call
+// // My name
 ////I can't play this game, so I ask again
-////Will you say my name?
+////Will you say
+// //My name?
 ////Has the memory gone? Are you feeling numb?
 ////Or have I become invisible?
 
