@@ -2,6 +2,9 @@ let currentMultiplier = 1;
 let rotation = 0;
 var win;
 multbtns = [];
+document.querySelector(".show-login").addEventListener("click", function() {
+    document.querySelector(".POPOUT").style.display = "block";
+});
 
 for (let i = 1; i <= 5; i++) { // Объявление кнопок и пуш в массив
     let btn = document.getElementById(`btn${i}`); // i.e. i=1 => btn1, i=2 => btn2, и т.д.

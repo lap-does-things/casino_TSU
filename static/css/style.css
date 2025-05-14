@@ -5,12 +5,38 @@ body {
     background-size: cover;
     background-position: center;
     color: white;
+    font-family: 'Comfortaa', cursive;
 }
-.menu-item {
+.POPOUT{
+    /*display: none; /* Изменяется позже в JS по кнопке */
+    display: none;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid red;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.4);
+}
+
+.POPOUT .close-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+.show-login{
+    cursor: pointer;
+}
+.menu-item button{
     display: inline-block;
     padding: 10px;
     font-family: 'Comfortaa', cursive;
     font-size: 16px;
+    color: white;;
     background-color: rgba(255, 255, 255, 0.1);
     margin: 15px;
     border: 1px solid red;
@@ -74,13 +100,17 @@ body {
     text-align: justify;
 }
 
-
-.revolver-image img {
-    width: 300px;
-    margin: 20px 0;
+#cylinder{
+    width: 449px; /* Эта сука блять не центрируется из-за вашего разрешения уебского*/
+    height: 449px;
+    scale:0.7; /* так что вот такой костыль */
     transition: transform 2s ease-out;
 }
 
+.revolver-image {
+    width: 449px;
+    height: 449px;
+}
 
 .controls {
     text-align: center;

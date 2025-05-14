@@ -10,6 +10,7 @@
         </script>
 </head>
 <body>
+
     <div class="overlay">
         <div class="top-bar">
             <div class="logo">
@@ -17,14 +18,10 @@
             </div>
             <div class="menu" style="display: inline-block;">
                 <div class="menu-item">
-                    <a href="#">Вход</a>
+                    <button id="show-login" class="show-login">Войти</button>
                 </div>
-                <div class="menu-item">
-                    <a href="#">Регистрация</a>
-                </div>
-            </div>
         </div>
-
+        </div>
         <div class="info-box">
             <p>Русская рулетка - классическая азартная игра, но в нашей версии нет риска для жизни. От Вас требуется
                 выбрать количество патронов, которые будут вставлены в барабан. Чем больше патронов, тем больше денег Вы
@@ -33,10 +30,8 @@
 
         <div class="revolver-image">
             <img id="cylinder" src="{{ url_for('static', filename='images/cylinder1.png') }}" alt="Цилиндр">
-
-            <div class="pointer"></div>
         </div>
-
+        <div class="pointer"></div>
         <div class="controls">
             <p>Сумма ставки:</p>
             <div class="bet-buttons">
@@ -49,9 +44,34 @@
             <input type="number",value="1" id="stake" name="stake", class="ebatsyavredno"placeholder="Сумма ставки">
             <button id="casinobtn" class="submit-btn" >ПОСТАВИТЬ</button>
         </div>
-    </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <div class="POPOUT">
+        <div class="close-btn">&times;</div>
+        <div class="login-form">
+            <h2>Вход</h2>
+            <div class="form-element">
+                <label for="login">Логин</label>
+                <input type="text" id="login" name="login" placeholder="Логин">
+            </div>
+            <div class="form-element">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" placeholder="Пароль">
+                <!-- TODO : Хранить пароли в хеше, а ещё лучше передавать хеш от клиента-->
+            </div>
+            <div class="form-element">
+                <input type="checkbox" id="remember-me" name="remember">
+                <label for="remember-me">Запомнить меня</label>
+                <!-- https://youtu.be/sS3ITyFBBJ8?si=0ritIrcTdgFLs1Sn&t=185  -->
+            </div>
+            <div class="form-element">
+                <button>Войти</button>
+            </div>
+            <div class="form-element">
+                <a href="https://www.youtube.com/watch?v=gREX6nXiMAY">Забыли пароль?</a>
+            </div>
+        </div>
+</div>
     <div class="overlay-message" id="resultMessage">Вы проиграли!</div>
 
 </body>
