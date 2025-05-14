@@ -21,7 +21,7 @@ header {
 }
 
 header h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     margin: 0;
 }
 
@@ -100,10 +100,9 @@ main {
     background-color: #cc0000;
 }
 
-/* Game Page Styles */
 .game-container {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
     border-radius: 10px;
     width: 100%;
     max-width: 800px;
@@ -134,16 +133,18 @@ main {
 
 .arrow {
     position: absolute;
-    top: -20px;
+    top: -10px;
     left: 50%;
     transform: translateX(-50%) rotate(180deg);
     width: 0;
     height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-bottom: 40px solid red;
+    border-bottom: 40px solid rgb(255, 255, 255);
 }
-
+p{
+    margin: 10px;
+}
 .multiplier-buttons {
     display: flex;
     justify-content: center;
@@ -198,7 +199,7 @@ main {
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s;
-    margin-top: 15px;
+
 }
 
 .spin-button:hover {
