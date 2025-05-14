@@ -1,189 +1,250 @@
-body {
+* {
     margin: 0;
-    font-family: sans-serif;
-    background-image: url("../images/russian_roulette_background.jpg");
-    background-size: cover;
-    background-position: center;
-    color: white;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Comfortaa', cursive;
-}
-.POPOUT{
-    /*display: none; /* Изменяется позже в JS по кнопке */
-    display: none;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid red;
-    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
-.POPOUT .close-btn{
+body {
+    background-image: url('../images/russian_roulette_background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+nav {
     position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
-    cursor: pointer;
+    top: 20px;
+    right: 20px;
 }
-.show-login{
-    cursor: pointer;
-}
-.menu-item button{
-    display: inline-block;
-    padding: 10px;
-    font-family: 'Comfortaa', cursive;
-    font-size: 16px;
-    color: white;;
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 15px;
-    border: 1px solid red;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-.menu-item a { /* DELETEME */
+
+.nav-button {
     color: white;
     text-decoration: none;
-}
-.ebatsyavredno{
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: black;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: rgba(255, 0, 0, 0.7);
     border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid red;
-    border-radius: 10px;
-    color: white;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    transition: background-color 0.3s;
 }
 
-#casinobtn{
-    color:white;
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    border: 1px solid red;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+.nav-button:hover {
+    background-color: rgba(255, 0, 0, 0.9);
 }
 
-#casinobtn:hover{
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-}
-#stake:hover{
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
 }
 
-.overlay {
-    background-color: rgba(0, 0, 0, 0.6);
+/* Login Page Styles */
+.login-container {
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 30px;
-    min-height: 100vh;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-.info-box {
-    font-family: 'Comfortaa', cursive;
-    font-size: 16px;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border: 1px solid red;
-    border-radius: 10px;
+.form-group {
     margin-bottom: 20px;
-    width: 400px;
-    text-align: justify;
 }
 
-#cylinder{
-    width: 449px; /* Эта сука блять не центрируется из-за вашего разрешения уебского*/
-    height: 449px;
-    scale:0.7; /* так что вот такой костыль */
-    transition: transform 2s ease-out;
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
 }
 
-.revolver-image {
-    width: 449px;
-    height: 449px;
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
 }
 
-.controls {
+.submit-button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #cc0000;
+}
+
+/* Game Page Styles */
+.game-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
     text-align: center;
 }
 
-.bet-buttons {
+.game-description {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.cylinder-container {
+    position: relative;
+    margin: 20px auto;
+    width: 300px;
+    height: 300px;
+}
+
+#cylinder {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 3s ease-out;
+    display: block;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.arrow {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid red;
+}
+
+.multiplier-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.multiplier {
+    background-color: rgba(70, 70, 70, 0.7);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 5px;
+}
+
+.multiplier:hover{
+    background-color: rgba(255, 0, 0, 0.9);
+}
+
+.multiplier.active {
+    background-color: #4CAF50 !important; /* Яркий зеленый */
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+}
+
+.bet-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#bet {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    width: 150px;
+}
+
+.spin-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 15px;
+}
+
+.spin-button:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
+
+.result {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    min-height: 40px;
+}
+
+.balance {
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+.error {
+    color: red;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+/* Profile Page Styles */
+.profile-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.logo img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10%;
     margin-bottom: 20px;
 }
 
-.btn {
-    padding: 10px 15px;
-    margin: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
+.user-info {
+    font-size: 1.5rem;
 }
 
-.btn.green {
-    background-color: green !important;
-    color: white;
-}
-
-.btn.red {
-    background-color: red;
-    color: white;
-}
-
-.submit-btn {
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: white;
-    color: black;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-@keyframes spin {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(1080deg); } /* 3 оборота */
-}
-
-.rotate {
-    transform: rotate(1080deg);
-}
-
-.pointer {
-    position: absolute;
-    top: calc(50% - 100px); /* регулируй под свою высоту */
-    /* TODO: Медиазапрос для размеров ВСЕХ элементов*/
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-top: 25px solid #fff; /* ЧЁТКИЙ УКАЗАТЕЛЬ */
-    z-index: 20;
-    filter: drop-shadow(0 0 5px black);
-}
-
-.overlay-message {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.85);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 48px;
-    z-index: 1000;
-    display: none;
+.user-info h2 {
+    margin: 10px 0;
 }

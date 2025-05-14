@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Логотип">
+    </div>
+    
+    <div class="user-info">
+        <h2>Никнейм: {{ login }}</h2>
+        <h2>Баланс: {{ balance }} руб.</h2>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="game-container">
+    <div class="game-description">
+        <p>Русская рулетка - классическая азартная игра, но в нашей версии нет риска для жизни. От Вас требуется выбрать количество патронов, которые будут вставлены в барабан. Чем больше патронов, тем больше денег Вы получите при выигрыше. При проигрыше вы теряете поставленные средства.</p>
+    </div>
+    
+    <div class="cylinder-container">
+        <img id="cylinder" src="{{ url_for('static', filename='images/cylinder1.png') }}" alt="Револьвер">
+        <div id="arrow" class="arrow"></div>
+    </div>
+    
+    <div class="multiplier-buttons">
+    <button class="multiplier" data-multiplier="1">1x</button>
+    <button class="multiplier" data-multiplier="2">2x</button>
+    <button class="multiplier" data-multiplier="3">3x</button>
+    <button class="multiplier" data-multiplier="4">4x</button>
+    <button class="multiplier" data-multiplier="5">5x</button>
+    </div>
+
+    <div class="bet-container">
+        <input type="number" id="bet" name="bet" min="1" step="1" max="{{ balance }}"
+               placeholder="Ставка в рублях" value="100">
+        <button id="spin" class="spin-button">Вращать</button>
+    </div>
+    
+    <div class="result" id="result">
+        {% if result %}{{ result }}{% endif %}
+    </div>
+    
+    <div class="balance">
+        Баланс: <span id="balance">{{ balance }}</span> руб.
+    </div>
+    
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

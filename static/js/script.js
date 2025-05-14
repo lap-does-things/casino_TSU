@@ -1,140 +1,162 @@
-let currentMultiplier = 1;
-let rotation = 0;
-var win;
-multbtns = [];
-document.querySelector(".show-login").addEventListener("click", function() {
-    document.querySelector(".POPOUT").style.display = "block";
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const cylinder = document.getElementById('cylinder');
+    const spinButton = document.getElementById('spin');
+    const multiplierButtons = document.querySelectorAll('.multiplier');
+    let selectedMultiplier = 1;
 
-for (let i = 1; i <= 5; i++) { // Объявление кнопок и пуш в массив
-    let btn = document.getElementById(`btn${i}`); // i.e. i=1 => btn1, i=2 => btn2, и т.д.
-    btn.addEventListener("click", function() {
-        setMultiplier(i);
-    });
-    multbtns.push(btn);
-}
+    // Добавляем константы для логики игры
+    const BULLET_POSITION = 0; // Патрон всегда в позиции 0° (верх)
+    const SECTOR_SIZE = 60; // 360° / 6 слотов
 
-function setMultiplier(x) {
-    multbtns.forEach(function(btn) {
-        btn.classList.remove("green");
-    });
-    $(`#btn${x}`).addClass("green"); // Ьоже как же я горд тем, что я до этого додумался
-    // Целый экран текста сжат до 4 строк.
-    currentMultiplier = x;
-    const img = document.getElementById("cylinder");
-    img.src = `/static/images/cylinder${x}.png`;
-}
-
-document.querySelector('.submit-btn').addEventListener('click', () => {
-    const StakeField = document.getElementById("stake");
-    const resultDiv = document.getElementById("resultMessage");
-    if (StakeField.value <= 0) {
-        resultDiv.innerText = `Введите сумму ставки!`;
-        resultDiv.style.display = "flex";
-        setTimeout(() => {
-            resultDiv.style.display = "none";
-            casinobtn.style.display = "inline-block";
-        }, 3000);
-        return;
+    // Инициализация
+    function init() {
+        // Сброс позиции барабана
+        cylinder.style.transform = 'rotate(0deg)';
+        // Активируем первую кнопку
+        if (multiplierButtons.length > 0) {
+            selectMultiplier(multiplierButtons[0]);
+        }
     }
-////When you can't even say
-//// My name
-////Has the memory gone? Are you feeling numb?
-////Go and call
-// // My name
-////I can't play this game, so I ask again
-////Will you say
-// //My name?
-////Has the memory gone? Are you feeling numb?
-////Or have I become invisible?
 
-// апишка солида снейка лмао
+    // Выбор множителя
+    function selectMultiplier(button) {
+        multiplierButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        selectedMultiplier = parseInt(button.dataset.multiplier);
 
-    $.getJSON(`/casino/krutka?mult=${currentMultiplier}&stake=${StakeField.value}`,
-        // [x] Обращаемся по ссылке к API для расчёта результата игры. API в этом же проекте, но зато можно крутить даже из консоли.
-        function(data) {
-            /* JSON API приведён к следующему виду :
-                {
-                  "result": {
-                    "stake": 200,
-                    "win": true
-                  }
-                }
-            */
-            win = data.result.win;
-            stake = data.result.stake;
-            switch (win) {
-                case true:
-                    turns = 3.65;
-                    break;
-                case false:
-                    turns = 2.8;
-                    break;
-                default:
-                    alert("Что-то пошло ужасно не так, попробуйте ещё раз!");
-                    break;
-            }
-            const casinobtn = document.getElementById("casinobtn");
-            casinobtn.style.display = "none";
-            const img = document.getElementById("cylinder");
-            win = win;
-            stake = stake;
-            var turns = turns;
+        // Меняем изображение барабана в зависимости от множителя
+        cylinder.src = `/static/images/cylinder${selectedMultiplier}.png`;
+        console.log(`Установлено изображение: cylinder${selectedMultiplier}.png`);
+    }
 
-            // Генерируем случайный поворот: 3–5 оборотов
-            // [x] это ХУЙНЯ!!!!!!!!!!!!!!!!!
-            /*
-            Обороты никак не связаны с количеством и расположением патронов в барабане.
-            Это просто случайный поворот цилиндра, и часто выпадает пуля, когда ты победил и наоборот.
+    // Обработчики кнопок множителя
+    multiplierButtons.forEach(button => {
+        button.addEventListener('click', () => selectMultiplier(button));
+    });
 
-            Я ТРАХАЛ ТОГО КТО ЭТО ПИСАЛ
+    // Функция определения результата
+    function getResult(finalAngle) {
+        // Нормализуем угол (0–360)
+        const normalizedAngle = (360 - (finalAngle % 360) + 360) % 360;
 
-        (если это не мужик)
-
-        -Лэп.
-
-        P.S. если это правда не мужик, то я серьёзно ;)
-            */
-
-        // https://a.d-cd.net/R34aG_8UGYblYQsYHOgDR9h9jMA-960.jpg
-
-            //turns = Math.floor(Math.random() * 5) + 11;
-
-            rotation += 360 * turns;
-            img.classList.remove("rotate");
-            img.style.transform = `rotate(${rotation}deg)`;
-
-            // Через 2.1 секунды — когда закончится анимация — показываем результат
-            setTimeout(() => {
-
-                const resultDiv = document.getElementById("resultMessage");
-                if (!win == true) {
-                    resultDiv.innerText = `Вы проиграли! Вы лишились ${stake} рублей!`;
-                    StakeField.value = Number(StakeField.value) - stake; // TODO : ЗАМЕНИТЬ VALUE НА ОБЩИЙ СЧЕТ ЮЗНИ
-                    if (StakeField.value < stake) {
-                        resultDiv.innerText = `Вы проиграли! Вы безбожно лишились ${stake / currentMultiplier} рублей!`;
-                        StakeField.value = 0;
-                    }
-                } else {
-                    resultDiv.innerText = `Вы победили!  Вы получили ${stake} рублей!`;
-                    StakeField.value = Number(StakeField.value) + stake;
-                }
-                resultDiv.style.display = "flex";
-                img.style.transform = `rotate(0deg)`;
-                    // !!!! ВАЖНО !!! это сброс анимации, чтобы углы сверху работали
-                    // !!!!! Если ты их уберешь, будет рассинхрон в анимации и исходе крутки !!!!
-                    // !!!! да и вообще выглядит пиздато тоже !!!!
-                // Убрать через 3 секунды
-                setTimeout(() => {
-                    resultDiv.style.display = "none";
-                    casinobtn.style.display = "inline-block";
-                }, 3000);
-            }, 2100);
-            turns = 0;
-            rotation = 0;
-            return turns;
+        // Специфический сектор 0: от 330 до 360 и от 0 до 30
+        let slotPosition;
+        if (normalizedAngle >= 330 || normalizedAngle < 30) {
+            slotPosition = 0;
+        } else {
+            slotPosition = Math.floor((normalizedAngle - 30) / 60) + 1;
         }
 
-    );
-    // Люблю вас, ребята. Это было тяжело, но весело.  - Лэп.
+        const loseSlots = {
+            1: [0],
+            2: [0, 5],
+            3: [0, 5, 4],
+            4: [0, 5, 4, 3],
+            5: [0, 5, 4, 3, 2]
+        };
+
+        const isLose = loseSlots[selectedMultiplier].includes(slotPosition);
+
+        return {
+            win: !isLose,
+            angle: normalizedAngle,
+            slot: slotPosition
+        };
+    }
+
+    // Обработчик вращения
+    spinButton.addEventListener('click', async function() {
+        if (spinButton.disabled) return;
+
+        spinButton.disabled = true;
+
+        // Случайные параметры вращения
+        const rotations = 7 + Math.floor(Math.random() * 9);
+        const randomOffset = Math.random() * 360; // случайный угол от 0 до 360
+        const finalSlot = Math.floor(Math.random() * 6); // 0-5
+        const finalAngleDegrees = finalSlot * SECTOR_SIZE;
+        const totalRotation = 360*5 + rotations * randomOffset;
+
+        // Анимация
+        cylinder.style.transition = `transform ${3 + rotations * 0.2}s cubic-bezier(0.3, 0.7, 0.2, 1)`;
+        cylinder.style.transform = `rotate(${totalRotation}deg)`;
+
+        // Определение результата
+        setTimeout(async () => {
+            const result = getResult(totalRotation);
+            console.log(`Выпал слот: ${result.slot} (${result.angle}°), ${result.win ? 'Выигрыш' : 'Проигрыш'}`);
+
+            try {
+                const response = await fetch("/game", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        'bet': document.getElementById('bet').value,
+                        'multiplier': selectedMultiplier,
+                        'is_win': result.win ? '1' : '0'
+                    })
+                });
+
+                if (!response.ok) throw new Error('Ошибка сервера');
+
+                const html = await response.text();
+                updatePage(html);
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+            } finally {
+                resetCylinderAnimation();
+            }
+        }, (3 + rotations * 0.2) * 1000);
+    });
+
+    // Сброс анимации барабана
+    function resetCylinderAnimation() {
+        cylinder.style.transition = 'none';
+        cylinder.style.transform = 'rotate(0deg)';
+
+        // Небольшая задержка перед возвращением transition
+        setTimeout(() => {
+            cylinder.style.transition = 'transform 3s ease-out';
+            spinButton.disabled = false;
+        }, 10);
+    }
+
+    // Отправка результата на сервер
+    async function sendResultToServer(bet, isWin) {
+        try {
+            const response = await fetch("/game", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'bet': bet,
+                    'multiplier': selectedMultiplier,
+                    'is_win': isWin ? '1' : '0'
+                })
+            });
+
+            if (!response.ok) throw new Error('Ошибка сервера');
+            const html = await response.text();
+            updatePage(html);
+        } catch (error) {
+            console.error('Ошибка:', error);
+            spinButton.disabled = false;
+        }
+    }
+
+    function updatePage(html) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        document.getElementById('result').innerHTML =
+            doc.getElementById('result').innerHTML;
+        document.getElementById('balance').textContent =
+            doc.getElementById('balance').textContent;
+    }
+
+    // Инициализация
+    init();
 });
