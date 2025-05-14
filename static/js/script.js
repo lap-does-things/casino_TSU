@@ -73,8 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Случайные параметры вращения
         const rotations = 7 + Math.floor(Math.random() * 9);
         const randomOffset = Math.random() * 360; // случайный угол от 0 до 360
-        const finalSlot = Math.floor(Math.random() * 6); // 0-5
-        const finalAngleDegrees = finalSlot * SECTOR_SIZE;
         const totalRotation = 360*5 + rotations * randomOffset;
 
         // Анимация
